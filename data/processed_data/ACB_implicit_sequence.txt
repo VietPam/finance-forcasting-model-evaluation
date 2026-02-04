@@ -1,0 +1,13 @@
+Data Preprocessing Summary
+==================================================
+
+Processed on: 2026-01-30 09:25:17
+
+Dataset splits:
+  Train: 1799 samples
+  Validation: 450 samples
+  Test: 563 samples
+
+Data shapes:
+  X_train: (1799, 720)
+  y_train: (1799, 3, 1)
