@@ -1,0 +1,19 @@
+# Core Data Science Libraries
+numpy>=1.21.0,<1.25.0
+pandas>=2.0.0,<3.0.0
+
+# Machine Learning
+scikit-learn>=1.3.0
+tensorflow>=2.13.0,<2.16.0
+
+# Technical Analysis
+ta>=0.11.0
+
+# Visualization
+matplotlib>=3.7.0
+
+# Utilities (usually comes with Python, but listed for completeness)
+# pickle - built-in
+# json - built-in
+# datetime - built-in
+# pathlib - built-in

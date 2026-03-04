@@ -2,13 +2,20 @@
 Configuration file for stock forecasting project
 Based on ANN and SVM comparative study
 """
+import os
+from pathlib import Path
+
+# Get the directory where this config file is located (finance_forecast_research/)
+_CONFIG_DIR = Path(__file__).resolve().parent
+# Get the project root directory (parent of finance_forecast_research/)
+_PROJECT_ROOT = _CONFIG_DIR.parent
 
 # Data Configuration
 TICKER = 'ACB'
-DATA_PATH = 'data/VN30_Dataset_2015_2026.csv'
+DATA_PATH = str(_PROJECT_ROOT / 'data' / 'VN30_Dataset_2015_2026.csv')
 TRAIN_TEST_SPLIT = 0.8  # 80% training, 20% testing
 VALIDATION_SPLIT = 0.2  # 20% of training data for validation
-SEQUENCE_LENGTH = 30  # Number of past days to use for prediction
+SEQUENCE_LENGTH = 60  # Number of past days to use for prediction
 
 # Target configuration - Multi-step multi-output prediction
 PREDICT_COLUMNS = ['close']  # 1 closing price per day
@@ -32,7 +39,7 @@ TECHNICAL_INDICATORS = {
 }
 
 # Processed data directory
-PROCESSED_DATA_DIR = 'data/processed_data'
+PROCESSED_DATA_DIR = str(_PROJECT_ROOT / 'data' / 'processed_data')
 
 MODELS = {
     'DEFAULT_ANN_CONFIG' : {
@@ -105,6 +112,6 @@ METRICS = [
 ]
 
 # Output Configuration
-EVALUATE_DIR = 'results'
-MODEL_DIR = 'models'
-PREDICT_DIR = 'predictions'
+EVALUATE_DIR = str(_CONFIG_DIR / 'results')
+MODEL_DIR = str(_PROJECT_ROOT / 'models')
+PREDICT_DIR = str(_CONFIG_DIR / 'predictions')

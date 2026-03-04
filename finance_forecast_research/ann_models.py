@@ -2,12 +2,23 @@
 Artificial Neural Network (ANN) models for stock forecasting
 Includes LSTM architectures
 """
+import sys
+from pathlib import Path
+
+# Handle imports for both direct execution and module import
+if __name__ == '__main__' and __package__ is None:
+    # Add parent directory to path when run directly
+    parent_dir = str(Path(__file__).resolve().parent.parent)
+    if parent_dir not in sys.path:
+        sys.path.insert(0, parent_dir)
+
 from datetime import datetime
 import json
-import config, os, pickle
+from finance_forecast_research import config
+import os, pickle
 import numpy as np
 
-from data_preprocess import DataPreprocessor
+from finance_forecast_research.data_preprocess import DataPreprocessor
 
 import tensorflow as tf
 from tensorflow import keras

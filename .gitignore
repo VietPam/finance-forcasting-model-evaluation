@@ -63,3 +63,6 @@ Thumbs.db
 
 # docs
 docs/*.pdf
+
+# finance_forecasting_research
+finance_forecasting_research/predictions/*.pkl

@@ -2,11 +2,19 @@
 Data preprocessing module for stock forecasting
 Handles data loading, cleaning, feature engineering, and preparation for implicit and explicit sequence models
 """
+import sys
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 import os, pickle, ta
 from datetime import datetime
-import config
+
+# Import config - works both ways now
+try:
+    from finance_forecast_research import config
+except ImportError:
+    import config
 
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, RobustScaler
 from sklearn.model_selection import train_test_split
@@ -360,11 +368,17 @@ class DataPreprocessor:
             f.write(f"  X_train: {X_train.shape}\n")
             f.write(f"  y_train: {y_train.shape}\n")
 
-if __name__ == '__main__':
+# Handle imports for both direct execution and module import
+if __name__ == '__main__' and __package__ is None:
+    # Add parent directory to path when run directly
+    parent_dir = str(Path(__file__).resolve().parent.parent)
+    if parent_dir not in sys.path:
+        sys.path.insert(0, parent_dir)
+
     # Test the preprocessor
     preprocessor = DataPreprocessor()
     np.set_printoptions(suppress=True)
-        
+
     # Test with first ticker
     target_ticker = config.TICKER
     print(f"\nTesting with ticker: {target_ticker}")

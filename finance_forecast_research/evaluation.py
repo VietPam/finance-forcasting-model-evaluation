@@ -1,4 +1,15 @@
-import config, pickle, os
+import sys
+from pathlib import Path
+
+# Handle imports for both direct execution and module import
+if __name__ == '__main__' and __package__ is None:
+    # Add parent directory to path when run directly
+    parent_dir = str(Path(__file__).resolve().parent.parent)
+    if parent_dir not in sys.path:
+        sys.path.insert(0, parent_dir)
+
+from finance_forecast_research import config
+import pickle, os
 import numpy as np
 import pandas as pd
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score

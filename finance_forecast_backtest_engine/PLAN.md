@@ -108,7 +108,7 @@ pred_t3 = 25_100  # UP (+100)
 ## 🏗️ System Architecture
 
 ```
-backtest_engine/
+finance_forecast_backtest_engine/
 ├── __init__.py                 # Package initialization
 ├── data_loader.py             # Load and prepare historical data
 ├── predictor.py               # Generate model predictions
@@ -159,7 +159,7 @@ def prepare_features_for_date(df: pd.DataFrame, target_date: str,
     """
     Prepare the 30-day feature window for making predictions.
     
-    This replicates the data_preprocess.py logic:
+    This replicates the ../finance_forecast_research/data_preprocess.py logic:
     - Get 30 days of historical data before target_date
     - Calculate 24 technical indicators (SMA, EMA, RSI, MACD, etc.)
     - Apply MinMaxScaler transformation
@@ -182,7 +182,7 @@ def prepare_features_for_date(df: pd.DataFrame, target_date: str,
 **What You Need to Know**:
 - ACB data is in `../data/VN30_Dataset_2015_2026.csv`
 - Available dates: 2014-06-30 to 2026-01-07
-- Must calculate same 24 features as training (see `data_preprocess.py` lines 50-70)
+- Must calculate same 24 features as training (see `../finance_forecast_research/data_preprocess.py` lines 50-70)
 - Must use the SAME scaler that was used during training (saved in processed data)
 
 ---
@@ -728,7 +728,15 @@ python run_backtest.py --model DEFAULT_ANN --start 2024-01-01 --end 2024-01-31 -
 
 ```
 finance-forecasting-model-evaluation/
-├── backtest_engine/
+├── finance_forecast_research/      # Research package (model training & evaluation)
+│   ├── __init__.py
+│   ├── ann_models.py
+│   ├── config.py
+│   ├── data_preprocess.py
+│   ├── evaluation.py
+│   ├── predictions/            # Research model predictions
+│   └── results/                # Research evaluation results
+├── finance_forecast_backtest_engine/
 │   ├── __init__.py
 │   ├── data_loader.py          # Load ACB data, prepare features
 │   ├── predictor.py            # Model predictions
@@ -736,15 +744,16 @@ finance-forecasting-model-evaluation/
 │   ├── strategy.py             # Strategy 1 logic
 │   ├── backtest.py             # Main simulation
 │   ├── metrics.py              # Performance calculations
-│   └── PLAN.md                 # This file
+│   └── results/
+│       └── backtest_*.csv      # Output files
+|   └── PLAN.md                 # This file
 ├── run_backtest.py             # CLI entry point
 ├── data/
-│   └── VN30_Dataset_2015_2026.csv
-├── models/
-│   ├── DEFAULT_ANN_best_model.keras
-│   └── LSTM_best_model.keras
-└── results/
-    └── backtest_*.csv          # Output files
+│   ├── VN30_Dataset_2015_2026.csv
+│   └── processed_data/
+└── models/
+    ├── DEFAULT_ANN_best_model.keras
+    └── LSTM_best_model.keras
 ```
 
 ---
@@ -772,7 +781,10 @@ Once the basic engine is working, we can add:
    - Not enough data for 30-day window at start
    - Market holidays (missing dates)
    - Division by zero in metrics
-6. **Reuse Existing Code**: Copy feature engineering logic from `data_preprocess.py`
+6. **Import Existing Logic**: Import feature engineering from `finance_forecast_research.data_preprocess`
+   ```python
+   from finance_forecast_research.data_preprocess import DataPreprocessor
+   ```
 
 ---
 
