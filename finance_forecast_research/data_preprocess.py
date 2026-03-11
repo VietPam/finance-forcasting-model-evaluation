@@ -20,7 +20,7 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler, RobustScaler
 from sklearn.model_selection import train_test_split
 
 class DataPreprocessor:
-    def __init__(self, scaler_type=None, data_path='data/VN30_Dataset_2015_2026.csv'):
+    def __init__(self, scaler_type=None, data_path='../data/VN30_Dataset_2015_2026.csv'):
         """
         Initialize the DataPreprocessor with optional data path.
         
