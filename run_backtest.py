@@ -4,7 +4,8 @@ import numpy as np
 from finance_forecast_research.backtest_engine import BacktestEngine
 
 def main():
-    file_path = "finance_forecast_research/predictions/LSTM_evaluate_data.pkl"
+    file_path = "finance_forecast_research/predictions/DEFAULT_ANN_evaluate_data.pkl"
+    # file_path = "finance_forecast_research/predictions/LSTM_evaluate_data.pkl"
     
     if not os.path.exists(file_path):
         print(f"Lỗi: Không tìm thấy file {file_path}. Hãy kiểm tra lại thư mục predict.")
